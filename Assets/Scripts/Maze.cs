@@ -47,8 +47,8 @@ public class Maze : MonoBehaviour
     void createFloor()
     {
 
-        floorSpawn = new Vector3(0.0f, 1f, -0.5f);
-        floor.transform.localScale = new Vector3(wallLength*(xSize/10), 1.0f,wallLength*(ySize / 10));
+        floorSpawn = new Vector3(0.0f,1.0f,0.0f);
+        floor.transform.localScale = new Vector3(5.0f,1.0f,5.0f);
 
         Instantiate(floor, floorSpawn, Quaternion.identity);
     }
