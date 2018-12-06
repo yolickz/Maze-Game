@@ -339,9 +339,14 @@ MonoBehaviour:
   wall: {fileID: 1156091806406386, guid: 4104f3eb884483f40a2a8cf2483286ad, type: 2}
   floor: {fileID: 1575509621360752, guid: 5f7611281b5066548962ed256422d38a, type: 2}
   wallLength: 1
-  xSize: 0
-  ySize: 0
-  cells: []
+  xSize: 1
+  ySize: 1
+  cells:
+  - visited: 0
+    north: {fileID: 0}
+    east: {fileID: 0}
+    south: {fileID: 0}
+    west: {fileID: 0}
 --- !u!4 &1851150169
 Transform:
   m_ObjectHideFlags: 0

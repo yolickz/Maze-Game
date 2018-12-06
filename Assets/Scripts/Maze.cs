@@ -13,6 +13,7 @@ public class Maze : MonoBehaviour
         public GameObject south;
         public GameObject west;
     }
+
     public GameObject wall;
     public GameObject floor;
     public float wallLength = 1.0f;
@@ -21,7 +22,9 @@ public class Maze : MonoBehaviour
     private Vector3 initialPos;
     private Vector3 floorSpawn;
     private GameObject wallHolder;
-    public Cell[] cells;
+    private Cell[] cells;
+    public int currentCell = 0;
+    private int TotalCells;
     // Use this for initialization
     void Start()
     {
@@ -79,7 +82,7 @@ public class Maze : MonoBehaviour
         {
             cells[cellprocess] = new Cell();
             cells[cellprocess].east = allWalls[eastWestProcess];
-            cells[cellprocess].south = allWalls[children + (xSize + 1) * ySize];
+            cells[cellprocess].south = allWalls[childProcess + (xSize + 1) * ySize];
             if(termCount == xSize)
             {
                 eastWestProcess += 2;
@@ -92,9 +95,66 @@ public class Maze : MonoBehaviour
             termCount++;
             childProcess++;
             cells[cellprocess].west = allWalls[eastWestProcess];
-            cells[cellprocess].south = allWalls[(childProcess + (xSize + 1) * ySize)+xSize+1];
+            cells[cellprocess].north = allWalls[(childProcess + (xSize + 1) * ySize)+xSize-1];
         }
+        CreateMaze();
+    }
 
+    void CreateMaze()
+    {
+        GiveMeNeighbour();
+    }
+    void GiveMeNeighbour()
+    {
+        TotalCells = xSize * ySize;
+        int length = 0;
+        int[] neighbours = new int[4];
+        int check = 0;
+        
+        check = ((currentCell+1)/xSize);
+        check -= 1;
+        check *= xSize;
+        check += ySize;
+        //West wall
+        if (currentCell + 1 < TotalCells && (currentCell + 1) != check)
+        {
+            if (cells[currentCell + 1].visited == false)
+            {
+                neighbours[length] = currentCell + 1;
+                length++;
+            }                    
+        }
+        //East wall
+        if (currentCell - 1 >= TotalCells && (currentCell + 1) != check)
+        {
+            if (cells[currentCell - 1].visited == false)
+            {
+                neighbours[length] = currentCell - 1;
+                length++;
+            }
+        }
+        //North wall
+        if (currentCell + xSize< TotalCells)
+        {
+            if (cells[currentCell + xSize].visited == false)
+            {
+                neighbours[length] = currentCell + xSize;
+                length++;
+            }
+        }
+        //South wall
+        if (currentCell - xSize >= 0)
+        {
+            if (cells[currentCell - xSize].visited == false)
+            {
+                neighbours[length] = currentCell - xSize;
+                length++;
+            }
+        }
+        for (int i = 0; i < length; i++)
+        {
+            Debug.Log(neighbours[i]);
+        }
 
     }
 
