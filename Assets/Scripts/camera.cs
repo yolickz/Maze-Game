@@ -10,7 +10,7 @@ public class camera : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        newCam = new Vector3(MAZE.xSize / 2, MAZE.xSize+ MAZE.ySize , MAZE.ySize / 2);
+        newCam = new Vector3(MAZE.xSize / 2, (MAZE.xSize + MAZE.ySize/2)-5, MAZE.ySize / 2);
         Vector3 Cam = newCam;
     }
 	
